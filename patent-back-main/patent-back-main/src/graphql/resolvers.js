@@ -60,8 +60,8 @@ function tokenCnpj () {
         data,
         {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic YjVkRkhqRGJwQ1lNU0tPeml6dGtva1N2THBRYTprZzJEaXV5am02bXNKZFY2YzhpWkpabnNVMm9h' 
+                'Content-Type': '#################',
+                'Authorization': '###################' 
             }
         }
     )
@@ -86,8 +86,8 @@ function tokenOps () {
         data,
         {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic bUFFUEEzRVhLd2t6STdzcEI1Y041UEE0Z3QwWjNPNEc6QWJ0NkFnTFh5bHMxcDVtYg==' 
+                'Content-Type': '############',
+                'Authorization': '####################' 
             }
         }
     )
@@ -271,8 +271,8 @@ export default {
 
         return axios.get(`https://gateway.apiserpro.serpro.gov.br/consulta-cnpj-df/v2/empresa/${niQtd}`, {
             headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${token.access_token}`
+                'Accept': '#########',
+                'Authorization': `##############`
             }
         })
         .then((resp) => {
@@ -297,8 +297,8 @@ export default {
                 range: args.range
             },
             headers: {
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${token.access_token}`
+                'Accept': '#########',
+                'Authorization': `##############`
             }
         }).catch((err) => {
             // console.log(xmlParser.toJson(err.response.data.fault.message));
@@ -338,7 +338,7 @@ export default {
 
         const user = await models.User.create({
             email,
-            password: await bcrypt.hash(password, 10),
+            password: await bcrypt.hash(password, #####),
             firstName,
             lastName,
             phone
