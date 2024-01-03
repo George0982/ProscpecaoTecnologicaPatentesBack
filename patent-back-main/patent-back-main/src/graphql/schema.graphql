@@ -1,0 +1,201 @@
+type Query {
+  me: User
+  companySerpro (ni: String): Company
+  listPatentOps (q: String range: String): ListPatent
+  company: Company
+  listDiagnosticos: ListDiagnostico
+  diagnostico: Diagnostico
+}
+
+type Mutation {
+  # inicio user
+  signup (
+    email: String!
+    password: String!
+    firstName: String!
+    lastName: String!
+    phone: String!
+  ): String!
+
+  login (
+    email: String!
+    password: String!
+  ): UserLogin!
+  # fim user
+
+  # inicio company
+  createCompany(
+    ni: String!
+    cnaePrincipal: CnaePrincipalInput
+    tipoEstabelecimento: String
+    nomeEmpresarial: String
+    nomeFantasia: String
+    correioEletronico: String
+    capitalSocial: String
+    porte: String
+    situacaoEspecial: String
+    dataSituacaoEspecial: String
+    dataAbertura: String
+  ): Company!
+  # fim company
+
+  createDiagnostico(
+      oferta: OfertaInput
+      plataforma: PlataformaInput
+      capturaValor: capturaValorInput
+      cadeiaSuprimentos: cadeiaSuprimentosInput
+  ): Diagnostico
+}
+
+type ListDiagnostico {
+    oferta: [String]
+    plataforma: [String]
+    capturaValor: [String]
+    cadeiaSuprimentos: [String]
+}
+
+# Diagnostico Inicio
+input OfertaInput  {
+    diagnosticoItem: [DiagnosticoItemInput]
+    total: Int!
+}
+
+input PlataformaInput {
+    diagnosticoItem: [DiagnosticoItemInput]
+    total: Int!
+}
+
+input capturaValorInput {
+    diagnosticoItem: [DiagnosticoItemInput]
+    total: Int!
+}
+
+input cadeiaSuprimentosInput {
+    diagnosticoItem: [DiagnosticoItemInput]
+    total: Int!
+}
+
+input DiagnosticoItemInput {
+    description: String!
+    value: Boolean!
+}
+
+type Diagnostico {
+    oferta: Oferta
+    plataforma: Plataforma
+    capturaValor: CapturaValor
+    cadeiaSuprimentos: CadeiaSuprimentos
+}
+
+
+type Oferta {
+    diagnosticoItem: [DiagnosticoItem]
+    total: String!
+}
+
+type Plataforma {
+    diagnosticoItem: [DiagnosticoItem]
+    total: String!
+}
+
+type CapturaValor {
+    diagnosticoItem: [DiagnosticoItem]
+    total: String!
+}
+
+type CadeiaSuprimentos {
+    diagnosticoItem: [DiagnosticoItem]
+    total: String!
+}
+
+type DiagnosticoItem {
+    description: String!
+    value: Boolean!
+}
+# Diagnostico fim
+
+# inicio Patente
+type ListPatent {
+    total: Int!
+    list: [Patent]
+}
+
+type Patent {
+    applicationReference: String
+    inventor: String
+    applicant: String
+    country: String
+    docNumber: String
+    kind: String
+    bibliographicData: publicationReference
+    inventionTitle: String
+    abstract: abstract
+    link: String
+}
+
+type publicationReference {
+    documentId: [documentId]
+}
+
+type documentId {
+    documentIdType: String
+    country: String
+    docNumber: String
+    kind: String
+    date: String
+}
+
+type abstract {
+    lang: String
+    p: String
+}
+# fim Patente
+
+type UserLogin {
+  token: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  company: Boolean! 
+  diagnostico: Boolean!
+}
+
+# inicio User
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  createdAt: String!
+  company: Company
+}
+# fim user
+
+
+# inicio Company
+input CnaePrincipalInput  {
+    codigo: String
+    descricao: String
+}
+
+type Company {
+  ni: String
+  cnaePrincipal: CnaePrincipal
+  tipoEstabelecimento: String
+  nomeEmpresarial: String
+  nomeFantasia: String
+  correioEletronico: String
+  capitalSocial: String
+  porte: String
+  situacaoEspecial: String
+  dataSituacaoEspecial: String
+  dataAbertura: String
+}
+
+type CnaePrincipal  {
+    codigo: String
+    descricao: String
+}
+
+# fim company
